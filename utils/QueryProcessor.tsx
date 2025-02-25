@@ -101,15 +101,24 @@ export default function QueryProcessor(query: string): string {
     return difference.toString(); // Return only the result
   }
 
-  // Function for multiplication
-  if (query.toLowerCase().includes("multiplied by")) {
+   // Function to find a number that is both a square and a cube (perfect sixth power)
+   if (query.toLowerCase().includes("both a square and a cube")) {
     const numbers = query.match(/-?\d+/g);
-    if (numbers === null || numbers.length < 2) {
+    if (numbers === null) {
       return "No Match";
     }
-    const product = parseInt(numbers[0]) * parseInt(numbers[1]);
-    return product.toString();
+
+    // Check for perfect sixth powers
+    const perfectSixthPowers = numbers.filter(num => {
+      const n = parseInt(num);
+      const root = Math.round(Math.pow(n, 1 / 6)); // Sixth root
+      return Math.pow(root, 6) === n; // Verify if it's a sixth power
+    });
+
+    return perfectSixthPowers.length > 0 ? perfectSixthPowers.join(", ") : "No Match";
   }
+
+
 
 
 
