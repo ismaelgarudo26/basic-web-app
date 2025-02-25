@@ -80,5 +80,38 @@ export default function QueryProcessor(query: string): string {
     return sum.toString(); // Fix: Return only the sum
   }
 
+  // Function to return the smallest number
+  if (query.toLowerCase().includes("smallest")) {
+    const numbers = query.match(/-?\d+/g);
+    if (numbers === null) {
+      return "No Match";
+    }
+    const smallest = Math.min(...numbers.map(Number));
+    return smallest.toString(); // Return only the number
+  }
+
+  // Function for subtraction (e.g., "What is 50 minus 20?")
+  if (query.toLowerCase().includes("minus")) {
+    const numbers = query.match(/-?\d+/g);
+    if (numbers === null || numbers.length < 2) {
+      return "No Match";
+    }
+    // Subtract in order: first number minus second number
+    const difference = parseInt(numbers[0]) - parseInt(numbers[1]);
+    return difference.toString(); // Return only the result
+  }
+
+  // Function for multiplication
+  if (query.toLowerCase().includes("multiplied by")) {
+    const numbers = query.match(/-?\d+/g);
+    if (numbers === null || numbers.length < 2) {
+      return "No Match";
+    }
+    const product = parseInt(numbers[0]) * parseInt(numbers[1]);
+    return product.toString();
+  }
+
+
+
   return "No Match"; 
 }
