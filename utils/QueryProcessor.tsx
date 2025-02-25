@@ -111,15 +111,29 @@ if (query.toLowerCase().includes("prime")) {
 
 // Function for exponentiation (power calculation)
 if (query.toLowerCase().includes("to the power of")) {
-  const numbers = query.match(/-?\d+/g);
+  const numbers = query.match(/\d+/g);
   if (numbers === null || numbers.length < 2) {
     return "No Match";
   }
-  const base = parseInt(numbers[0]);
-  const exponent = parseInt(numbers[1]);
-  const result = Math.pow(base, exponent);
+
+  const base = BigInt(numbers[0]);
+  let exponent = parseInt(numbers[1]); // Regular number for exponent
+  
+  // Prevent computation for extremely large exponents
+  if (exponent > 100) {
+    return "Result too large";
+  }
+
+  let result = BigInt(1);
+  while (exponent > 0) {
+    result *= base;
+    exponent--;
+  }
+
   return result.toString();
 }
+
+
 
 
   return "No Match"; 
