@@ -17,5 +17,18 @@ export default function QueryProcessor(query: string): string {
     return "igarudo"; 
   }
 
+
+  //function returns largest number
+  if (query.toLowerCase().includes("largest")) {
+    const numbers = query.match(/\d+/g);
+    if (numbers === null) {
+      return "No Match";
+    }
+    const largest = Math.max(...numbers.map(Number));
+    return `The largest number is ${largest}`;
+  }
+
+
+
   return "No Match"; 
 }
