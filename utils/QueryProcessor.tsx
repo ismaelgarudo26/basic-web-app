@@ -27,6 +27,15 @@ export default function QueryProcessor(query: string): string {
     const largest = Math.max(...numbers.map(Number));
     return `The largest number is ${largest}`;
   }
+  //function for adding two numbers What is 30 plus 60?
+  if (query.toLowerCase().includes("plus")) {
+    const numbers = query.match(/\d+/g);
+    if (numbers === null) {
+      return "No Match";
+    }
+    const sum = numbers.reduce((acc, num) => acc + parseInt(num), 0);
+    return `The sum is ${sum}`;
+  }
 
 
 
